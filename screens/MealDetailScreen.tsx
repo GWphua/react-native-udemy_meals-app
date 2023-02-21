@@ -7,8 +7,9 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
+import IconButton from "../components/IconButtons";
 import List from "../components/MealDetail/List";
 import MealDetails from "../components/MealDetail/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
@@ -36,7 +37,13 @@ const MealDetailScreen: FC<IMealDetailsScreen> = ({ navigation, route }) => {
     navigation.setOptions({
       title: selectedMeal.title,
       headerRight: () => {
-        return <Button title="Tap me!" onPress={headerButtonPressHandler} />;
+        return (
+          <IconButton
+            icon="star"
+            color="white"
+            onPress={headerButtonPressHandler}
+          />
+        );
       },
     });
   }, [navigation, headerButtonPressHandler]);
