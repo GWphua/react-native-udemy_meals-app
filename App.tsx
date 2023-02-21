@@ -1,12 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import CategoriesScreen from "./screens/CategoriesScreen";
+import { NavigationContainer } from "@react-navigation/native";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World!!!!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light" />
+ 
+        <CategoriesScreen />
+ 
+    </>
   );
 }
 
