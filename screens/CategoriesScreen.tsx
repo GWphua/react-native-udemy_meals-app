@@ -9,7 +9,7 @@ import RootStackParamList from "../models/rootStackParamList";
 interface ICategoriesScreen {
   navigation: NativeStackNavigationProp<
     RootStackParamList,
-    "MealsCategories",
+    "Drawer",
     undefined
   >;
 }

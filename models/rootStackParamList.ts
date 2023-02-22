@@ -1,5 +1,5 @@
 type RootStackParamList = {
-  MealsCategories: undefined;
+  Drawer: undefined;
   MealsOverview: { categoryId: string };
   MealDetails: { mealId: string };
 };

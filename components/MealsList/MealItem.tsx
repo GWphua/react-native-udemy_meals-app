@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC } from "react";
 import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
-import RootStackParamList from "../models/rootStackParamList";
-import MealDetails from "./MealDetail/MealDetails";
+import RootStackParamList from "../../models/rootStackParamList";
+import MealDetails from "../MealDetail/MealDetails";
 
 interface IMealItem {
   mealId: string;

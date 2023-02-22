@@ -1,20 +1,17 @@
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { FC, useLayoutEffect } from "react";
-import {
-  Button,
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import IconButton from "../components/IconButtons";
 import List from "../components/MealDetail/List";
 import MealDetails from "../components/MealDetail/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import { MEALS } from "../data/dummy-data";
 import RootStackParamList from "../models/rootStackParamList";
+import { RootState } from "../store";
+import { addFavourite, removeFavourite } from "../store/favourites";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 interface IMealDetailsScreen {
   navigation: NativeStackNavigationProp<
@@ -26,11 +23,21 @@ interface IMealDetailsScreen {
 }
 
 const MealDetailScreen: FC<IMealDetailsScreen> = ({ navigation, route }) => {
+  const favouriteMealsId =
+    useAppSelector((state: RootState) => state.favouriteMeals.ids) ?? "";
+  const dispatch = useAppDispatch();
+
   const mealId = route.params.mealId;
   const selectedMeal = MEALS.find((meal) => meal.id === mealId)!;
 
-  const headerButtonPressHandler = () => {
-    console.log("PRESSED");
+  const mealIsFavourite = favouriteMealsId.includes(mealId);
+
+  const changeFavouriteStatusHandler = () => {
+    if (mealIsFavourite) {
+      dispatch(removeFavourite({ id: mealId }));
+    } else {
+      dispatch(addFavourite({ id: mealId }));
+    }
   };
 
   useLayoutEffect(() => {
@@ -39,14 +46,14 @@ const MealDetailScreen: FC<IMealDetailsScreen> = ({ navigation, route }) => {
       headerRight: () => {
         return (
           <IconButton
-            icon="star"
+            icon={mealIsFavourite ? "star" : "star-outline"}
             color="white"
-            onPress={headerButtonPressHandler}
+            onPress={changeFavouriteStatusHandler}
           />
         );
       },
     });
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavouriteStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>
